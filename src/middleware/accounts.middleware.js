@@ -4,7 +4,7 @@ import { ObjectId } from 'mongodb';
 export default async function accountMiddleware(req,res,next){
     const token = req.headers.authorization?.replace('Bearer ' , '')
     const {userId} = req.params
-    if(!token || !userId) return res.sendStatus(401);
+    if(!token || !userId) return res.sendStatus(400);
 
     try {
        const session = await Mongo_Session({find: {token,}})

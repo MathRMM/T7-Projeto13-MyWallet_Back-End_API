@@ -24,12 +24,11 @@ export default async function postAccountMiddleware(req,res,next){
 
     if(validation.error){
         const errors = validation.error.details.map(detail => detail.message)
-        return res.status(400).send(errors)
+        return res.status(422).send(errors)
     }
 
     try {
        const session = await Mongo_Session({find: {token,}})
-       console.log(session.userId.equals(ObjectId(userId)))
        if(!session || !session.userId.equals(ObjectId(userId))) return res.sendStatus(401)
     } catch (error) {
         console.error(error)
