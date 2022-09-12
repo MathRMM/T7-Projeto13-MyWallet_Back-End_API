@@ -7,6 +7,6 @@ import postAccountTransferenceController from '../controllers/postAccountsTransf
 const router = express.Router()
 
 router.get('/accounts/:userId', accountsMiddleware, getAccountController);
-router.post('/accounts/:userId/transference', accountsMiddleware, postAccountTransferenceController);
+router.post('/accounts/:userId', accountsMiddleware, postAccountTransferenceController);
 
 export default router

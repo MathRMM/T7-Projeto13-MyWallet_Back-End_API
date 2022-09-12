@@ -5,16 +5,17 @@ import dayjs from 'dayjs';
 
 export default async function postAccountsTransference(req,res){
     const {userId} = req.params
-    const {valueInput, description} = req.body
+    const {value, description, type} = req.body
 
 
     try {
         const account = await Mongo_Accounts({find:{userId: ObjectId(userId)}})
         console.log(account.transference)
         account.transference.push({
-            value:Number(valueInput).toFixed(2), 
+            value:Number(value).toFixed(2), 
             description,
-            time: dayjs().format('DD/MM')
+            time: dayjs().format('DD/MM'),
+            type,
         })
         let addAmount = 0
         account.transference.map(obj => addAmount += Number(obj.value))

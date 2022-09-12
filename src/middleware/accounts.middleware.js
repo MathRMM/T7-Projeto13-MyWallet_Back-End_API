@@ -7,8 +7,9 @@ export default async function accountMiddleware(req,res,next){
     if(!token || !userId) return res.sendStatus(401);
 
     try {
-       const session = await Mongo_Session({find: {userId:ObjectId(userId)}})
-       if(session.token !== token) return res.sendStatus(401)
+       const session = await Mongo_Session({find: {token,}})
+       console.log(session.userId.equals(ObjectId(userId)))
+       if(!session || !session.userId.equals(ObjectId(userId))) return res.sendStatus(401)
     } catch (error) {
         console.error(error)
         return res.sendStatus(500)
