@@ -10,7 +10,6 @@ export default async function postAccountsTransference(req,res){
 
     try {
         const account = await Mongo_Accounts({find:{userId: ObjectId(userId)}})
-        console.log(account.transference)
         account.transference.push({
             value:Number(value).toFixed(2), 
             description,
@@ -24,7 +23,6 @@ export default async function postAccountsTransference(req,res){
             transference: account.transference,
             amount: Number(addAmount).toFixed(2)
         })
-        console.log(update)
         return res.sendStatus(200)
     } catch (error) {
         console.error(error)
