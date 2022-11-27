@@ -1,7 +1,7 @@
-import { MongoClient, ObjectId } from 'mongodb';
+import { MongoClient} from 'mongodb';
 import dotenv from 'dotenv';
-dotenv.config({path:"./../.env"})
-
+dotenv.config()
+console.log(process.env.MONGO_URI)
 const mongoClient = new MongoClient(process.env.MONGO_URI)
 let db
 mongoClient.connect().then(() => {
@@ -17,7 +17,7 @@ const Mongo_Users = async ({find, create})=>{
      }
 } 
 
-const Mongo_Accounts = async ({find, create, update})=>{
+const Mongo_Accounts = async ({find, create})=>{
     if(find){
        return await db.collection('accounts').findOne(find)
     }

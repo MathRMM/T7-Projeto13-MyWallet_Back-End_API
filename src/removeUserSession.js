@@ -5,10 +5,9 @@ export default async function removeUserSession(){
         const seconds = Date.now() - 10*1000
        
         try {
-            console.log(await Mongo_Session({remove:{
+            await Mongo_Session({remove:{
                 lastStatus: {$lte: seconds}
-            }}))
-            
+            }})
         } catch (error) {
             console.error(error)
         }
